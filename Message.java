@@ -1,19 +1,22 @@
 package WN;
 
+import users.User;
+
 import java.time.LocalDateTime;
 
 public class Message {
 
     private String content;
-    private String author;
+    private User author;
     private LocalDateTime created;
 
-    public Message(String content, String author, LocalDateTime created) {
+    public Message(String content, User author, LocalDateTime created) {
         this.content = content;
         this.author = author;
-        this.created = created;
+        if (created != null) {
+            this.created = created;
+        }
     }
-
     public String getContent() {
         return content;
     }
@@ -22,13 +25,6 @@ public class Message {
         this.content = content;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public LocalDateTime getCreated() {
         return created;
@@ -42,6 +38,7 @@ public class Message {
 
 
     public String getMessage(){
-        return created.toString()+ author + "" + content;
+        String userName = (author != null) ? author.getUsername() : "Anonymous";
+        return created.toString()+ userName + "" + content;
     }
 }
